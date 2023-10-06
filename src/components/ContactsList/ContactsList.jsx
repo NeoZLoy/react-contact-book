@@ -1,17 +1,24 @@
+import { ContactsFilter } from "components/ContactsFilter/ContactsFilter";
 import { useDispatch, useSelector } from "react-redux";
-import { StyledContactItem, StyledDeleteButton, StyledList } from "./ContactsList.styled"
-import { removeContact } from "redux/operations";
+import { Link } from "react-router-dom";
+import { selectAuthInfo } from "redux/auth/selectors";
+import { removeContact } from "redux/contacts/operations";
+import { selectContacts } from "redux/contacts/selectors";
+import { selectNameFilter } from "redux/filters/selectors";
 
 
 export const ContactsList = () => {
 
-    const contacts = useSelector(state => state.contacts.contacts);
-    const nameFilter = useSelector(state => state.filters.name)
+
+    const contacts = useSelector(selectContacts);
+    const nameFilter = useSelector(selectNameFilter)
     const dispatch = useDispatch();
     const visibleContacts = contacts.filter(contact => contact.name.toLowerCase().includes(nameFilter.toLowerCase()))
     return(
+    <>
+        <ContactsFilter/>
         <ul>
-            {visibleContacts.map(contact => {
+            {contacts.map(contact => {
                 return(
                     <li key = {contact.id}>
                         <div>                        
@@ -19,7 +26,7 @@ export const ContactsList = () => {
                         </div>
                         <div>
                         <button
-                         type="button" onClick={() => dispatch(
+                        type="button" onClick={() => dispatch(
                             removeContact(contact)
                             )}>Delete</button> 
                         </div>
@@ -27,5 +34,6 @@ export const ContactsList = () => {
                 )
             })}
         </ul>
+    </>     
     )
 }

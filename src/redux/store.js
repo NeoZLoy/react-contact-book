@@ -9,13 +9,15 @@ import {
     PURGE,
     REGISTER, 
 } from 'redux-persist'
-import persistReducer from "redux-persist/es/persistReducer";
 import storage from 'redux-persist/lib/storage'
+import { contactsReducer } from "./contacts/contactsSlice";
+import { authReducer } from "./auth/authSlice";
+import { filterReducer } from "./filters/filterSlice";
 
 const rootReducer = combineReducers({
     contacts: contactsReducer,
-    login: loginReducer,
-    register: registerReducer,
+    auth: authReducer,
+    filter: filterReducer,
 })
 
 const persistConfig = {
@@ -24,10 +26,10 @@ const persistConfig = {
     whitelist: ['token']
   }
 
-  const persistReducer = persistReducer(persistConfig, rootReducer)
+  const persistedReducer = persistReducer(persistConfig, rootReducer)
 
   export const store = configureStore({
-    reducer: persistReducer,
+    reducer: persistedReducer,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: {
             ignoreActions: {FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, }

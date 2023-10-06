@@ -1,27 +1,22 @@
-import { Formik, Field, Form } from 'formik';
-import { useDispatch } from 'react-redux';
-import { register } from 'redux/auth/operations';
+import { Formik, Field, Form } from 'formik'
+import { useDispatch } from 'react-redux'
+import { login } from "redux/auth/operations"
 
-export const Registration = () => {
+export const LoginForm = () => {
+
     const dispatch = useDispatch();
-    return(
+    return (
         <>
-            <h2>Registration</h2>
             <Formik
                 initialValues={{
-                name: '',
                 password: '',
                 email: '', 
                 }}
                 onSubmit = {(values, actions) => {
-                    dispatch(register({...values}))
+                    dispatch(login({...values}))
                     actions.resetForm()
                 }}>
                 <Form>
-                    <label>
-                        <span>Login</span>
-                        <Field name = 'name' placeholder = 'Enter your login...'></Field>
-                    </label>
                     <label>
                         <span>Email</span>
                         <Field name = 'email' placeholder = 'Enter your email...'></Field>
@@ -34,6 +29,5 @@ export const Registration = () => {
                 </Form>
             </Formik>
         </>
-        
     )
 }

@@ -1,8 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import * as Yup from 'yup';
-import { Formik, Field, } from 'formik';
-import { StyledButton, StyledError, StyledField, StyledForm, StyledLabel } from './AddContactForm.styled';
-import { addContact } from 'redux/operations';
+import {Form, Formik, Field, ErrorMessage, } from 'formik';
+import { addContact } from 'redux/contacts/operations';
 import { selectContacts } from 'redux/contacts/selectors';
 
 
@@ -40,19 +39,19 @@ export const AddContactForm = () => {
                 }
             }
             >
-                <StyledForm>
-                    <StyledLabel>
+                <Form>
+                    <label>
                     <span>Name</span>
-                    <StyledField name="name" placeholder="Contact name..." />
-                    <StyledError name="name" component="span"/>
-                    </StyledLabel>
-                    <StyledLabel>
+                    <Field name="name" placeholder="Contact name..." />
+                    <ErrorMessage name="name" component="span"/>
+                    </label>
+                    <label>
                     <span>Tel</span>
                     <Field name="tel" type = "tel" placeholder="000-00-00" />
-                    <StyledError name="tel" component="span"/>
-                    </StyledLabel>
-                    <StyledButton type = "submit">Add contact</StyledButton>
-                </StyledForm>
+                    <ErrorMessage name="tel" component="span"/>
+                    </label>
+                    <button type = "submit">Add contact</button>
+                </Form>
             </Formik>
         </>
        

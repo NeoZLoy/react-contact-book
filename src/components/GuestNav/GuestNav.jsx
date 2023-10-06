@@ -1,11 +1,16 @@
+import { Link } from "react-router-dom"
+
 export const GuestNav = () => {
     return(
         <ul>
+            <li>
+                <Link to={"/"}>Home</Link>
+            </li>
             <li>           
-                <button>Register</button>
+                <Link to={"/signup"}>Register</Link>
             </li>
             <li>
-                <button>Log in</button>
+                <Link to={"/login"}>Log in</Link>
             </li>
         </ul>
     )

@@ -1,12 +1,19 @@
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { selectUser } from "redux/auth/selectors"
 
-const userEmail = selectUser.email;
 
 export const UserNav = () => {
+
+    const userEmail = useSelector(selectUser).email;
+
     return(
-        <div>
-            <p>Hello, {userEmail}</p>
-            <button>Log out</button>
-        </div>
+        <>
+            <Link to={'/'}>Home</Link>
+            <div>
+                <p>Hello, {userEmail}</p>
+                <button>Log out</button>
+            </div>
+        </>
     )
 }
