@@ -1,14 +1,12 @@
 import { GuestNav } from "components/GuestNav/GuestNav";
 import { UserNav } from "components/UserNav/UserNav";
-import { useSelector } from "react-redux";
-import { selectAuthInfo } from "redux/auth/selectors";
+import { useAuth } from "hooks/useAuth";
 
 export const Navigation = () => {
-  const authData = useSelector(selectAuthInfo)
-
+  const isLogged = useAuth().isLogged;
     return (
      <>
-      {authData.isLogged 
+      {isLogged 
         ? <UserNav/>
         : <GuestNav/>
       }

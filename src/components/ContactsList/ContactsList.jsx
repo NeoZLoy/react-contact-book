@@ -1,7 +1,6 @@
 import { ContactsFilter } from "components/ContactsFilter/ContactsFilter";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { selectAuthInfo } from "redux/auth/selectors";
 import { removeContact } from "redux/contacts/operations";
 import { selectContacts } from "redux/contacts/selectors";
 import { selectNameFilter } from "redux/filters/selectors";

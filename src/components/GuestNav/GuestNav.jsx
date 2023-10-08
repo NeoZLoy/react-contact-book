@@ -1,16 +1,16 @@
-import { Link } from "react-router-dom"
+import { Link, NavLink } from "react-router-dom"
 
 export const GuestNav = () => {
     return(
         <ul>
             <li>
-                <Link to={"/"}>Home</Link>
+                <NavLink to={"/"}>Home</NavLink>
             </li>
             <li>           
-                <Link to={"/signup"}>Register</Link>
+                <NavLink to={"/signup"}>Register</NavLink>
             </li>
             <li>
-                <Link to={"/login"}>Log in</Link>
+                <NavLink to={"/login"}>Log in</NavLink>
             </li>
         </ul>
     )

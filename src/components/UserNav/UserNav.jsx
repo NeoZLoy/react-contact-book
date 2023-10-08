@@ -1,18 +1,29 @@
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { logOut } from "redux/auth/operations";
 import { selectUser } from "redux/auth/selectors"
 
 
 export const UserNav = () => {
 
-    const userEmail = useSelector(selectUser).email;
+    const userName = useSelector(selectUser).name;
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const handleLogOut = () => {
+        dispatch(logOut())
+    if(logOut.fulfilled){
+        navigate('/', {replace: true})
+    }
+    }
 
     return(
         <>
-            <Link to={'/'}>Home</Link>
             <div>
-                <p>Hello, {userEmail}</p>
-                <button>Log out</button>
+                <NavLink to={'/'}>Home</NavLink>
+            </div>
+            <div>
+                <p>Hello, {userName}</p>
+                <button onClick={handleLogOut}>Log out</button>
             </div>
         </>
     )
