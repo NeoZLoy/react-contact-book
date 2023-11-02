@@ -23,6 +23,7 @@ import { addContact, fetchContacts, removeContact } from "./operations";
             state.error = null;
         }).addCase(addContact.fulfilled, (state, action) => {
             state.isLoading = false;
+            console.log(action.payload)
             state.contacts.push(action.payload);
             state.error = null;
         }).addCase(addContact.rejected, (state, action) => {

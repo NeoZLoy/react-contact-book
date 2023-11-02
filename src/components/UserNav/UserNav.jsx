@@ -1,3 +1,4 @@
+import { useAuth } from "hooks/useAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logOut } from "redux/auth/operations";
@@ -7,6 +8,7 @@ import { selectUser } from "redux/auth/selectors"
 export const UserNav = () => {
 
     const userName = useSelector(selectUser).name;
+    const token = useAuth();
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleLogOut = () => {
@@ -20,6 +22,7 @@ export const UserNav = () => {
         <>
             <div>
                 <NavLink to={'/'}>Home</NavLink>
+                <NavLink to={'/contacts'}>Contacts</NavLink>
             </div>
             <div>
                 <p>Hello, {userName}</p>

@@ -21,9 +21,10 @@ export const LoginForm = () => {
                 }}
                 onSubmit = {(values, actions) => {
                     dispatch(login({...values}))
-                    console.log(dispatch(login({...values}))
-                    )
                     actions.resetForm()
+                    if(login.fulfilled){
+                        navigate('/contacts', {replace: true})
+                    }
                     
                 }}>
                 <Form>
@@ -35,7 +36,7 @@ export const LoginForm = () => {
                         <span>Password</span>
                         <Field name = 'password' placeholder = 'Enter your password...'></Field>
                     </label>
-                    <button type='submit' onClick={handleLogIn}>Registration</button>
+                    <button type='submit'>Login</button>
                 </Form>
             </Formik>
         </>

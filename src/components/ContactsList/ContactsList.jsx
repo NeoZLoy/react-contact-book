@@ -14,19 +14,16 @@ export const ContactsList = () => {
     // const visibleContacts = contacts.filter(contact => contact.name.toLowerCase().includes(nameFilter.toLowerCase()))
     return(
     <>
-        <ContactsFilter/>
         <ul>
             {contacts.map(contact => {
                 return(
                     <li key = {contact.id}>
                         <div>                        
-                            <span>{contact.name}:</span>  <span>{contact.tel}</span>
+                            <span>{contact.name}:</span>  <span>{contact.number}</span>
                         </div>
                         <div>
                         <button
-                        type="button" onClick={() => dispatch(
-                            removeContact(contact)
-                            )}>Delete</button> 
+                        type="button" onClick={() => dispatch(removeContact(contact.id))}>Delete</button> 
                         </div>
                     </li>
                 )
