@@ -1,4 +1,4 @@
-import { useDispatch} from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import * as Yup from 'yup';
 import {Form, Formik, Field, ErrorMessage, } from 'formik';
 import { addContact } from 'redux/contacts/operations';
@@ -12,14 +12,14 @@ const validation = Yup.object().shape({
 
 export const AddContactForm = () => {
     const dispatch = useDispatch()
-    const contacts = selectContacts;
+    const contacts = useSelector(selectContacts);
     return (
         <>
             <h2>Phonebook</h2>
             <Formik
             initialValues={{
-            name: '',
-            tel: '',
+            name: ' ',
+            number: ' ',
             }}
             validationSchema={validation}
             onSubmit = {
@@ -47,8 +47,8 @@ export const AddContactForm = () => {
                     </label>
                     <label>
                     <span>Tel</span>
-                    <Field name="tel" type = "tel" placeholder="000-00-00" />
-                    <ErrorMessage name="tel" component="span"/>
+                    <Field name="number" type = "tel" placeholder="000-00-00" />
+                    <ErrorMessage name="number" component="span"/>
                     </label>
                     <button type = "submit">Add contact</button>
                 </Form>
