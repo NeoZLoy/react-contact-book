@@ -3,7 +3,7 @@ import { Layout } from "./Layout";
 import { HomePage } from "pages/HomePage";
 import { Login } from "pages/Login";
 import { Register } from "pages/Register";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { refreshUser } from "redux/auth/operations";
 import { useAuth } from "hooks/useAuth";

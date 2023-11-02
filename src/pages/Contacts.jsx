@@ -8,7 +8,7 @@ import { fetchContacts } from "redux/contacts/operations"
 
 export const Contacts = () => {
     const dispatch = useDispatch();
-    const isLogged = useAuth().isLogged
+    // const isLogged = useAuth().isLogged
     useEffect(() => {
       dispatch(fetchContacts())
     }, [dispatch])
