@@ -1,11 +1,9 @@
 import { Formik, Field, Form } from 'formik';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { register } from 'redux/auth/operations';
 
 export const Registration = () => {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     return(
         <>
             <h2>Registration</h2>
@@ -17,9 +15,6 @@ export const Registration = () => {
                 }}
                 onSubmit = {(values, actions) => {
                     dispatch(register({...values}))
-                    if(register.fulfilled){
-                        navigate('/', {replace: true})
-                    }
                     actions.resetForm()
                 }}>
                 <Form>

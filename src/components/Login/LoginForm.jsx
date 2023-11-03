@@ -1,17 +1,10 @@
 import { Formik, Field, Form } from 'formik'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom';
 import { login } from "redux/auth/operations"
 
 export const LoginForm = () => {
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const handleLogIn = () => {
-        if(login.fulfilled){
-            navigate('/contacts', {replace: true})
-        }
-    }
+    const dispatch = useDispatch();  
     return (
         <>
             <Formik
@@ -22,9 +15,6 @@ export const LoginForm = () => {
                 onSubmit = {(values, actions) => {
                     dispatch(login({...values}))
                     actions.resetForm()
-                    if(login.fulfilled){
-                        navigate('/contacts', {replace: true})
-                    }
                     
                 }}>
                 <Form>
