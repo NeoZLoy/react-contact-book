@@ -1,8 +1,7 @@
-import { useDispatch, useSelector} from 'react-redux';
-import { ErrorMessage, Formik, Form, Field} from 'formik';
+import { useDispatch } from 'react-redux';
+import { Formik, Form, Field} from 'formik';
 import * as Yup from 'yup';
 import { addContact } from 'redux/contacts/operations';
-import { selectContacts } from 'redux/contacts/selectors';
 const validation = Yup.object().shape({
     name: Yup.string().min(1, 'Too short name!').required('Name is required'),
     tel: Yup.string().min(9, 'Number is too short, use 000-00-00').max(9, 'Number is too long, use 000-00-00').required('Phone number is required') ,
@@ -10,8 +9,6 @@ const validation = Yup.object().shape({
 
 export const AddContactForm = () => {
     const dispatch = useDispatch()
-    const contacts = useSelector(selectContacts);
- 
     return (
         <div>
             <h2>Phonebook</h2>

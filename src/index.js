@@ -6,9 +6,15 @@ import { Provider } from 'react-redux';
 import { persistor, store } from 'redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { BrowserRouter } from 'react-router-dom';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Container from '@mui/material/Container';
+
+const defaultTheme = createTheme();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+  <ThemeProvider theme={defaultTheme}>
+    <Container>
       <PersistGate loading = {null} persistor={persistor}>
           <Provider store={store}>
             <BrowserRouter basename='/goit-react-hw-08-phonebook'>
@@ -16,5 +22,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             </BrowserRouter>
           </Provider>
       </PersistGate>
-  </React.StrictMode>
+    </Container>
+  </ThemeProvider>
+</React.StrictMode>
+
 );
