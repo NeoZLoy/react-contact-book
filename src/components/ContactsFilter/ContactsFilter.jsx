@@ -1,9 +1,10 @@
 import { Form, Formik, Field } from "formik"
-import { useDispatch, } from "react-redux"
-import { nameFilter } from "redux/filters/operations";
+import { useDispatch } from "react-redux"
+import { nameFilter } from "redux/filters/filterSlice";
+
+
 
 export const ContactsFilter = () => {
-     
     const dispatch = useDispatch();
 
     return(
