@@ -47,12 +47,11 @@ export const Registration = () => {
         <Container component="main" maxWidth="xs"> 
             <CssBaseline />
             <Box
-                sx={{
-                marginTop: 8,
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                }}
+                   sx={{
+                    marginTop: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',}}
             >
                 <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
                     <LockOutlinedIcon />
@@ -73,6 +72,7 @@ export const Registration = () => {
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.name}
+                    sx={{mt: 2}}
                     ></TextField>
                     <TextField 
                     name = 'email'
@@ -87,6 +87,8 @@ export const Registration = () => {
                     value={formik.values.email}
                     error={formik.touched.email && Boolean(formik.errors.email)}
                     helperText={formik.touched.email && formik.errors.email}
+                    sx={{mt: 2}}
+
                     ></TextField>
                     <TextField 
                     name = 'password'
@@ -100,6 +102,7 @@ export const Registration = () => {
                     onBlur={formik.handleBlur}
                     error={formik.touched.password && Boolean(formik.errors.password)}
                     helperText={formik.touched.password && formik.errors.password}
+                    sx={{mt: 2}}
                     ></TextField>
                     <Button
                     type="submit"
