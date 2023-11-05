@@ -15,7 +15,7 @@ export const ContactsList = () => {
     const visibleContacts = contacts.filter(contact => contact.name.toLowerCase().includes(nameFilter.toLowerCase()))
     return visibleContacts.length === 0
             ? <>
-                <Alert variant="outlined" severity="warning" sx={{mt: 1}}>
+                <Alert variant="outlined" severity="info" sx={{mt: 1}}>
                     We can't find any contacts :c
                 </Alert>
             </>
