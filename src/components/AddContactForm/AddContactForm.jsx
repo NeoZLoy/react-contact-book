@@ -20,7 +20,9 @@ export const AddContactForm = () => {
             onSubmit={ (values, actions) => {
                 dispatch(addContact({...values}))
                 actions.resetForm();
-             }}>
+             }}
+             validationSchema={validation}
+             >
                 <Form>
                     <label>
                         <span>Name</span>
