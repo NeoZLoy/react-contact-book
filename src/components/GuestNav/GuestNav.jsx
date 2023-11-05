@@ -5,28 +5,28 @@ export const GuestNav = () => {
     return(
         
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                <StyledLink to={'/'}>
+            <StyledLink to={'/'}>
 
                 <Button
-                    sx={{ my: 2, color: 'white', display: 'block' }}>
+                    sx={{ color: 'white', display: 'block', fontSize: 18 }}>
                     Home
                 </Button>
-                </StyledLink>
+            </StyledLink>
 
-                <StyledLink to = {'/login'}>
+            <StyledLink to = {'/login'}>
                 <Button
-                    sx={{ my: 2, color: 'white', display: 'block' }}
+                    sx={{ color: 'white', display: 'block', fontSize: 18 }}
                 >
                     Login
                 </Button>
                 </StyledLink>
-                <StyledLink to = {'/signup'}>
+            <StyledLink to = {'/signup'}>
                 <Button
-                    sx={{ my: 2, color: 'white', display: 'block' }}
+                    sx={{ color: 'white', display: 'block', fontSize: 18}}
                 >
                     Registration
                 </Button>
-                </StyledLink>
+            </StyledLink>
 
           </Box>
     )

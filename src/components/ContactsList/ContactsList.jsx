@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeContact } from "redux/contacts/operations";
 import { selectContacts } from "redux/contacts/selectors";
 import { selectNameFilter } from "redux/filters/selectors";
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { Alert } from "@mui/material";
 
 
 export const ContactsList = () => {
@@ -13,7 +15,9 @@ export const ContactsList = () => {
     const visibleContacts = contacts.filter(contact => contact.name.toLowerCase().includes(nameFilter.toLowerCase()))
     return visibleContacts.length === 0
             ? <>
-                <p>We can't find this contact :c</p>
+                <Alert variant="outlined" severity="warning" sx={{mt: 1}}>
+                    We can't find any contacts :c
+                </Alert>
             </>
             :   <>
             <ul>
@@ -25,7 +29,7 @@ export const ContactsList = () => {
                             </div>
                             <div>
                             <button
-                            type="button" onClick={() => dispatch(removeContact(contact.id))}>Delete</button> 
+                            type="button" onClick={() => dispatch(removeContact(contact.id))}><DeleteOutlineIcon/></button> 
                             </div>
                         </li>
                     )

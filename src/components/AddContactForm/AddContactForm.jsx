@@ -1,38 +1,77 @@
-import { useDispatch } from 'react-redux';
-import { Formik, Form, Field} from 'formik';
+import { useDispatch, useSelector } from 'react-redux';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import { addContact } from 'redux/contacts/operations';
+import { Box, Button, CssBaseline } from '@mui/material';
+import { selectContacts } from 'redux/contacts/selectors';
 const validation = Yup.object().shape({
     name: Yup.string().min(1, 'Too short name!').required('Name is required'),
-    tel: Yup.string().min(9, 'Number is too short, use 000-00-00').max(9, 'Number is too long, use 000-00-00').required('Phone number is required') ,
+    number: Yup.string().min(9, 'Number is too short, use 000-00-00').max(9, 'Number is too long, use 000-00-00').required('Phone number is required') ,
   })
 
+  
 export const AddContactForm = () => {
     const dispatch = useDispatch()
-    return (
-        <div>
-            <h2>Phonebook</h2>
-            <Formik
-            initialValues={{
-                name: '',
-                number: '',
-            }}
-            onSubmit={ (values, actions) => {
+    const contacts = useSelector(selectContacts);
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+            number: '',
+        },
+        validationSchema: validation,
+        onSubmit: (values, actions) => {
+            if (contacts.filter(contact => contact.name === formik.values.name).length > 0){
+                alert('You already have this contact! Please enter another name')
+                return
+            }else{
                 dispatch(addContact({...values}))
                 actions.resetForm();
-             }}
-             validationSchema={validation}
-             >
-                <Form>
-                    <label>
-                        <span>Name</span>
-                        <Field name="name" placeholder="Contact name..." />
-                    </label>
-                    <label>
-                        <span>Tel</span>
-                        <Field name="number" type = "tel" placeholder="000-00-00" />
-                    </label>
-                    <button type = "submit">Add contact</button>
-                </Form>
-            </Formik>
-        </div>)}
+            }
+            
+         },
+      })
+    return (
+        <div>
+             <Typography variant="h6" gutterBottom>
+                    Add new contact
+                </Typography>
+            <Box component="form" noValidate onSubmit={formik.handleSubmit} sx={{ display: 'flex', gap: 1, mb: 3}}>
+                <TextField
+                required
+                id="name"
+                name="name"
+                label="Contact name"
+                placeholder='John'
+                autoComplete="given-name"
+                variant="standard"
+                onChange={formik.handleChange}
+                value={formik.values.name}
+                error={formik.touched.name && Boolean(formik.errors.name)}
+                helperText={formik.touched.name && formik.errors.name}
+                />
+
+                <TextField
+                required
+                id="number"
+                name="number"
+                label="Contact Number"
+                placeholder='000-00-00'
+                variant="standard"
+                onChange={formik.handleChange}
+                value={formik.values.number}
+                error={formik.touched.number && Boolean(formik.errors.number)}
+                helperText={formik.touched.number && formik.errors.number}
+                />
+                <Button
+                type="submit"
+                variant="contained"
+                
+                >
+                Add contact
+                </Button>
+            </Box>
+        </div>
+    )
+}

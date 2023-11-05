@@ -1,5 +1,6 @@
+import { Box, Button, Typography} from "@mui/material";
+import { StyledLink } from "components/UserNav/UserNav.styled";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, } from "react-router-dom";
 import { logOut } from "redux/auth/operations";
 import { selectUser } from "redux/auth/selectors"
 
@@ -14,15 +15,28 @@ export const UserNav = () => {
     }
 
     return(
-        <>
-            <div>
-                <NavLink to={'/'}>Home</NavLink>
-                <NavLink to={'/contacts'}>Contacts</NavLink>
-            </div>
-            <div>
-                <p>Hello, {userName}</p>
-                <button onClick={handleLogOut}>Log out</button>
-            </div>
-        </>
+        <Box sx ={{ display: 'flex', mb: 1, mt: 1, justifyContent:'space-between' }}>
+           <Box sx={{display: 'flex', alignItems: 'center'}}>
+            <StyledLink to={'/'}>
+                    <Button
+                        sx={{ color: 'white', display: 'block', fontSize: 18 }}>
+                        Home
+                    </Button>
+                </StyledLink>
+                <StyledLink to={'/contacts'}>
+                    <Button
+                        sx={{ color: 'white', display: 'block', fontSize: 18 }}>
+                        Contacts
+                    </Button>
+                </StyledLink>
+            </Box>
+            <Box sx = {{display: 'flex', alignItems: 'center'}}>
+                <Typography sx ={{px: '10px', py: '4px'}}>Hello, {userName}</Typography>
+                <Button  type="submit"
+                        variant="contained"
+                        size="small"
+                        sx={{ ml: 2 }} onClick={handleLogOut}>Log out</Button>
+            </Box>
+        </Box>
     )
 }
