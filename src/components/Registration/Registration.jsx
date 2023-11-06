@@ -9,8 +9,10 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import * as yup from 'yup';
 import { Link } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { register } from 'redux/auth/operations';
+import { Backdrop, CircularProgress } from '@mui/material';
+import { selectIsLoading } from 'redux/auth/selectors';
 
 
 const validationSchema = yup.object({
@@ -30,6 +32,7 @@ const validationSchema = yup.object({
 
 export const Registration = () => {
     const dispatch = useDispatch();
+    const isLoading = useSelector(selectIsLoading)
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -45,6 +48,14 @@ export const Registration = () => {
 
     return(
         <Container component="main" maxWidth="xs"> 
+            {
+                isLoading && <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open = {isLoading}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
+            }     
             <CssBaseline />
             <Box
                    sx={{
@@ -91,12 +102,12 @@ export const Registration = () => {
 
                     ></TextField>
                     <TextField 
+                    type = 'password'
                     name = 'password'
                     placeholder = 'Enter your password...'
                     fullWidth
                     id="password"
                     label="Password"
-                    type="password"
                     value={formik.values.password}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}

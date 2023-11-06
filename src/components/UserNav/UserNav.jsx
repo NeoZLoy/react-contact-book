@@ -1,8 +1,8 @@
-import { Box, Button, Typography} from "@mui/material";
+import { Backdrop, Box, Button, CircularProgress, Typography} from "@mui/material";
 import { StyledLink } from "components/UserNav/UserNav.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "redux/auth/operations";
-import { selectUser } from "redux/auth/selectors"
+import { selectIsLoading, selectUser } from "redux/auth/selectors"
 
 
 export const UserNav = () => {
@@ -11,11 +11,21 @@ export const UserNav = () => {
     const dispatch = useDispatch();
     const handleLogOut = () => {
         dispatch(logOut())
-   
     }
+    const isLoading = useSelector(selectIsLoading);
+
 
     return(
+       
         <Box sx ={{ display: 'flex', mb: 1, mt: 1, justifyContent:'space-between' }}>
+            {
+                isLoading && <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open = {isLoading}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
+            }       
            <Box sx={{display: 'flex', alignItems: 'center'}}>
             <StyledLink to={'/'}>
                     <Button

@@ -1,11 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import { green } from '@mui/material/colors';
 import {useFormik} from 'formik';
 import * as Yup from 'yup';
 import { addContact } from 'redux/contacts/operations';
-import { Box, Button, CssBaseline } from '@mui/material';
-import { selectContacts } from 'redux/contacts/selectors';
+import { Box, Button, CircularProgress } from '@mui/material';
+import { selectContacts, selectIsLoading, } from 'redux/contacts/selectors';
 const validation = Yup.object().shape({
     name: Yup.string().min(1, 'Too short name!').required('Name is required'),
     number: Yup.string().min(9, 'Number is too short, use 000-00-00').max(9, 'Number is too long, use 000-00-00').required('Phone number is required') ,
@@ -15,6 +16,7 @@ const validation = Yup.object().shape({
 export const AddContactForm = () => {
     const dispatch = useDispatch()
     const contacts = useSelector(selectContacts);
+    const isLoading = useSelector(selectIsLoading);
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -64,13 +66,28 @@ export const AddContactForm = () => {
                 error={formik.touched.number && Boolean(formik.errors.number)}
                 helperText={formik.touched.number && formik.errors.number}
                 />
-                <Button
-                type="submit"
-                variant="contained"
-                
-                >
-                Add contact
-                </Button>
+                 <Box sx={{ m: 1, position: 'relative' }}>
+                    <Button
+                    variant="contained"
+                    disabled={isLoading}
+                    type="submit"
+                    >
+                    Add contact
+                    </Button>
+                    {isLoading && (
+                    <CircularProgress
+                        size={24}
+                        sx={{
+                        color: green[500],
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        marginTop: '-12px',
+                        marginLeft: '-12px',
+                        }}
+                    />
+                    )}
+                </Box>
             </Box>
         </div>
     )

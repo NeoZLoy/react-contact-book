@@ -1,9 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import { removeContact } from "redux/contacts/operations";
-import { selectContacts } from "redux/contacts/selectors";
+import { selectContacts, selectIsLoading } from "redux/contacts/selectors";
 import { selectNameFilter } from "redux/filters/selectors";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import { Alert } from "@mui/material";
+import ContactPageOutlinedIcon from '@mui/icons-material/ContactPageOutlined';
+import { Alert, Avatar, Button, List, ListItem, ListItemAvatar, ListItemText } from "@mui/material";
+import CircularProgress from '@mui/material/CircularProgress';
+
 
 
 export const ContactsList = () => {
@@ -12,6 +15,7 @@ export const ContactsList = () => {
     const contacts = useSelector(selectContacts);
     const nameFilter = useSelector(selectNameFilter)
     const dispatch = useDispatch();
+    const isLoading = useSelector(selectIsLoading)
     const visibleContacts = contacts.filter(contact => contact.name.toLowerCase().includes(nameFilter.toLowerCase()))
     return visibleContacts.length === 0
             ? <>
@@ -20,20 +24,32 @@ export const ContactsList = () => {
                 </Alert>
             </>
             :   <>
-            <ul>
+            {isLoading && <CircularProgress/>}
+            <List
+            sx={{width: '320px'}}>
                 {visibleContacts.map(contact => {
                     return(
-                        <li key = {contact.id}>
-                            <div>                        
-                                <span>{contact.name}:</span>  <span>{contact.number}</span>
-                            </div>
-                            <div>
-                            <button
-                            type="button" onClick={() => dispatch(removeContact(contact.id))}><DeleteOutlineIcon/></button> 
-                            </div>
-                        </li>
+                        
+                            <ListItem
+                                key={contact.id}
+                            >
+                                <ListItemAvatar>
+                                    <Avatar>
+                                    <ContactPageOutlinedIcon />
+                                    </Avatar>
+                                </ListItemAvatar>
+                                <ListItemText
+                                    primary={contact.name}
+                                    secondary={contact.number}
+                                />
+                                 <Button onClick={() => dispatch(removeContact(contact.id))} >
+                                    <DeleteOutlineIcon />
+                                </Button>
+                            </ListItem>
+                     
                     )
                 })}
-            </ul>
+            </List>
+
         </>  
         }

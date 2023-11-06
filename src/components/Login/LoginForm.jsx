@@ -7,19 +7,20 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { useFormik } from 'formik'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { login } from "redux/auth/operations"
+import { selectIsLoading } from 'redux/auth/selectors';
+import { Backdrop, CircularProgress } from '@mui/material';
 export const LoginForm = () => {
 
     const dispatch = useDispatch();  
-
+    const isLoading = useSelector(selectIsLoading)
     const formik = useFormik({
         initialValues: {
             password: '',
             email: '', 
             },
         onSubmit: (values, actions) => {
-            console.log({...values})
             dispatch(login({...values}))
             actions.resetForm()
                 
@@ -27,6 +28,14 @@ export const LoginForm = () => {
 
     return (
             <Container maxWidth="xs">
+                    {
+                isLoading && <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open = {isLoading}
+            >
+                <CircularProgress color="inherit" />
+            </Backdrop>
+            }     
             <CssBaseline />
             <Box
           sx={{
@@ -61,18 +70,19 @@ export const LoginForm = () => {
                     <label>
                         <span>Password</span>
                         <TextField
-                         margin="normal"
-                         required
-                         fullWidth
-                         id="password"
-                         label="Password"
-                         autoComplete="password"
-                         name = 'password' 
-                         placeholder = 'Enter your password...'
-                         onChange={formik.handleChange}
-                         onBlur={formik.handleBlur}
-                         value={formik.values.password}
-                         ></TextField>
+                        type = 'password'
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="password"
+                        label="Password"
+                        autoComplete="password"
+                        name = 'password' 
+                        placeholder = 'Enter your password...'
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.password}
+                        ></TextField>
                     </label>
                     <Button
                         type="submit"
