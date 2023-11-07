@@ -34,7 +34,7 @@ import { addContact, fetchContacts, removeContact } from "./operations";
         }).addCase(removeContact.fulfilled, (state, action) => {
             state.isLoading = false;
             const index = state.contacts.findIndex(
-            contact => contact.id === action.payload)
+            contact => contact.id === action.payload.id)
             state.contacts.splice(index, 1);
             state.error = null;
         }).addCase(removeContact.rejected, (state, action) => {
