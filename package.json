@@ -1,8 +1,8 @@
 {
-  "name": "goit-react-hw-08-phonebook",
+  "name": "react-contact-book",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://neozloy.github.io/goit-react-hw-08-phonebook/",
+  "homepage": "https://neozloy.github.io/react-contact-book/",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
