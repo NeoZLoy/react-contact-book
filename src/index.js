@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Container>
       <PersistGate loading = {null} persistor={persistor}>
           <Provider store={store}>
-            <BrowserRouter basename='/react-contaact-book'>
+            <BrowserRouter basename='/react-contact-book'>
               <App />
             </BrowserRouter>
           </Provider>
